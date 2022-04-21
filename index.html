@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<html>
+    <body>
+        
+        <main>
+            <audio id="myAudio" loop muted>
+                <source src="beep.mp3" type="audio/mpeg">
+            </audio>
+
+            
+            <button id = "start" class="mybutton button1">PROGRAM INDÍTÁSA</button>
+            <button id = "stop" class="mybutton button3">PROGRAM MEGÁLLÍTÁSA</button>
+            <button id = "restart" class="mybutton button2">PROGRAM ÚJRAINDÍTÁSA</button>
+            <button onClick = "muteChanger()" class="mybutton button5">RIASZTÁS NÉMÍTÁSA</button>
+
+            <script>
+                var muted = true;
+                const startBTN = document.getElementById('start');
+                startBTN.addEventListener('click', async _ => {
+                try {
+
+                    const response = await fetch('http://localhost:8000/start', {
+                    method: 'post',
+                    body: {
+                        msg: "hi"
+                    }
+                    });
+                    console.log('Completed!', response);
+                } catch(err) {
+                    console.error(`Error: ${err}`);
+                }
+                });
+                const stopBTN = document.getElementById('stop');
+                stopBTN.addEventListener('click', async _ => {
+                try {     
+                    const response = await fetch('http://localhost:8000/stop', {
+                    method: 'post',
+                    body: {
+                        msg: "hi"
+                    }
+                    });
+                    console.log('Completed!', response);
+                } catch(err) {
+                    console.error(`Error: ${err}`);
+                }
+                });
+                const restartBTN = document.getElementById('restart');
+                restartBTN.addEventListener('click', async _ => {
+                try {     
+                    const response = await fetch('http://localhost:8000/restart', {
+                    method: 'post',
+                    body: {
+                        msg: "restart"
+                    }
+                    });
+                    console.log('Completed!', response);
+                } catch(err) {
+                    console.error(`Error: ${err}`);
+                }
+                });
+                function muteChanger(){
+                    muted = !muted;
+                    document.getElementById('myAudio').muted = muted;
+                }
+            </script>
+            <div class = "main-content">
+                <div id = "desktop-dashboard" class = "desktop">
+                    <div id = "desktop-dashboard-content">
+                        <table class = "table table-bordered table-striped table-sticky table-hover w100">
+                            <thead>
+                                <tr><th style="width: 1rem;">Status</th><th style="width: 90px;">Address</th><th>Device</th><th>Variables</th></tr>
+                            </thead>
+                            <tbody id = "mytbody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+<script>
+    // Create WebSocket connection.
+    const socket = new WebSocket('ws://localhost:8000');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+        console.log('Connected to WS Server')
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+        if (event.data.includes('<tr>')){
+            document.getElementById('mytbody').innerHTML = event.data
+            if(event.data.includes('alarm')){
+                document.getElementById('myAudio').play()
+            }
+            else{
+                document.getElementById('myAudio').pause()
+            }
+        }
+        else if (event.data == 'clear'){
+            document.getElementById('mytbody').innerHTML = ""
+        }
+        else if (event.data == "stopAudio"){
+            audio = document.getElementById('myAudio').pause()
+        }
+
+    });
+
+    const sendMessage = () => {
+        socket.send('Hello From Client1!');
+    }
+</script>
+</html> 
