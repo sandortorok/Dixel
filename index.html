@@ -1,118 +1,154 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <html>
     <body>
-        
-        <main>
-            <audio id="myAudio" loop muted>
-                <source src="beep.mp3" type="audio/mpeg">
-            </audio>
-
-            
-            <button id = "start" class="mybutton button1">PROGRAM INDÍTÁSA</button>
-            <button id = "stop" class="mybutton button3">PROGRAM MEGÁLLÍTÁSA</button>
-            <button id = "restart" class="mybutton button2">PROGRAM ÚJRAINDÍTÁSA</button>
-            <button onClick = "muteChanger()" class="mybutton button5">RIASZTÁS NÉMÍTÁSA</button>
-
-            <script>
-                var muted = true;
-                const startBTN = document.getElementById('start');
-                startBTN.addEventListener('click', async _ => {
-                try {
-
-                    const response = await fetch('http://localhost:8000/start', {
-                    method: 'post',
-                    body: {
-                        msg: "hi"
-                    }
-                    });
-                    console.log('Completed!', response);
-                } catch(err) {
-                    console.error(`Error: ${err}`);
-                }
-                });
-                const stopBTN = document.getElementById('stop');
-                stopBTN.addEventListener('click', async _ => {
-                try {     
-                    const response = await fetch('http://localhost:8000/stop', {
-                    method: 'post',
-                    body: {
-                        msg: "hi"
-                    }
-                    });
-                    console.log('Completed!', response);
-                } catch(err) {
-                    console.error(`Error: ${err}`);
-                }
-                });
-                const restartBTN = document.getElementById('restart');
-                restartBTN.addEventListener('click', async _ => {
-                try {     
-                    const response = await fetch('http://localhost:8000/restart', {
-                    method: 'post',
-                    body: {
-                        msg: "restart"
-                    }
-                    });
-                    console.log('Completed!', response);
-                } catch(err) {
-                    console.error(`Error: ${err}`);
-                }
-                });
-                function muteChanger(){
-                    muted = !muted;
-                    document.getElementById('myAudio').muted = muted;
-                }
-            </script>
-            <div class = "main-content">
-                <div id = "desktop-dashboard" class = "desktop">
-                    <div id = "desktop-dashboard-content">
-                        <table class = "table table-bordered table-striped table-sticky table-hover w100">
-                            <thead>
-                                <tr><th style="width: 1rem;">Status</th><th style="width: 90px;">Address</th><th>Device</th><th>Variables</th></tr>
-                            </thead>
-                            <tbody id = "mytbody">
-
-                            </tbody>
-                        </table>
-                    </div>
+        <section id = "mygrid" class="flexgrid">
+            <div class="right-side">
+                <div class="right-top">
+                    <div class="item">BETÖLTÉS</div>
+                </div>
+                <div class="right-bottom">
+                    <div class="item">BETÖLTÉS</div>
+                    <div class="item">BETÖLTÉS</div>
+                </div>
+                <div class="right-bottom">
+                    <div class="item">BETÖLTÉS</div>
+                    <div class="item">BETÖLTÉS</div>
                 </div>
             </div>
-        </main>
+        </section>
     </body>
-<script>
-    // Create WebSocket connection.
-    const socket = new WebSocket('ws://localhost:8000');
+    <script>
+        function start(){
+            arr = []
+            msgHandler(arr)
+        }
+        start()
+        function addElement(header, obj){
+            name = obj.name;
+            color = obj.color;
+            temp = obj.temp;
 
-    // Connection opened
-    socket.addEventListener('open', function (event) {
-        console.log('Connected to WS Server')
-    });
+            bottomdiv = document.createElement("div");
+            bottomdiv.classList.add("right-bottom")
+            header.append(bottomdiv);
 
-    // Listen for messages
-    socket.addEventListener('message', function (event) {
-        if (event.data.includes('<tr>')){
-            document.getElementById('mytbody').innerHTML = event.data
-            if(event.data.includes('alarm')){
-                document.getElementById('myAudio').play()
+            firstitem = document.createElement("div")
+            firstitem.classList.add("item")
+            firstitem.classList.add(color)
+            firstitem.innerHTML = name
+            bottomdiv.append(firstitem)
+
+            seconditem = document.createElement("div")
+            seconditem.classList.add("item")
+            seconditem.classList.add(color)
+            seconditem.innerHTML = temp
+            seconditem.onclick = function(){console.log('hey')}
+            bottomdiv.append(seconditem)
+        }
+        function msgHandler(objArray){
+            mygrid = document.getElementById('mygrid')
+            mygrid.innerHTML = ""
+
+            //header1
+
+            header1 = document.createElement("div");
+            header1.classList.add("right-side")
+            mygrid.append(header1)
+
+            mytop = document.createElement("div")
+            mytop.classList.add("right-top")
+            header1.append(mytop)
+
+            firstitem = document.createElement("div")
+            firstitem.classList.add("item")
+            firstitem.innerHTML = "Utolsó frissítés:"
+            mytop.append(firstitem)
+
+            objArray1 = objArray.splice(0, 30)
+            objArray1.forEach(obj => {
+                addElement(header1, obj)
+            })
+            leftover = 30 - objArray1.length
+            for (i = 0; i < leftover; i++) {
+                addElement(header1, {name : "-", color : "device-status-off", temp: " - "})
             }
-            else{
-                document.getElementById('myAudio').pause()
+            //header2
+
+            header2 = document.createElement("div");
+            header2.classList.add("right-side")
+            mygrid.append(header2)
+
+            mytop = document.createElement("div")
+            mytop.classList.add("right-top")
+            header2.append(mytop)
+
+            firstitem = document.createElement("div")
+            firstitem.classList.add("item")
+
+            var time = new Date();
+            firstitem.innerHTML = time.toLocaleString()
+            mytop.append(firstitem)
+
+            objArray2 = objArray.splice(0, 30)
+            objArray2.forEach(obj => {
+                addElement(header2, obj)
+            })
+            leftover = 30 - objArray2.length
+            for (i = 0; i < leftover; i++) {
+                addElement(header2, {name : "-", color : "device-status-off", temp: " - "})
+            }
+            //header3
+
+            header3 = document.createElement("div");
+            header3.classList.add("right-side")
+            mygrid.append(header3)
+
+            mytop = document.createElement("div")
+            mytop.classList.add("right-top")
+            header3.append(mytop)
+
+            firstitem = document.createElement("div")
+            firstitem.classList.add("item")
+            firstitem.innerHTML = "OSZLOP 3"
+            mytop.append(firstitem)
+
+            objArray3 = objArray.splice(0, 30)
+            objArray3.forEach(obj => {
+                addElement(header3, obj)
+            })
+            leftover = 30 - objArray3.length
+            for (i = 0; i < leftover; i++) {
+                addElement(header3, {name : "-", color : "device-status-off", temp: " - "})
             }
         }
-        else if (event.data == 'clear'){
-            document.getElementById('mytbody').innerHTML = ""
+        // Create WebSocket connection.
+        const socket = new WebSocket('ws://localhost:8000');
+    
+        // Connection opened
+        socket.addEventListener('open', function (event) {
+            console.log('Connected to WS Server')
+        });
+    
+        // Listen for messages
+        socket.addEventListener('message', function (event) {
+            if (isJsonString(event.data)) {
+                msgHandler(JSON.parse(event.data));
+            }
+        });
+    
+        const sendMessage = () => {
+            socket.send('Hello From Client1!');
         }
-        else if (event.data == "stopAudio"){
-            audio = document.getElementById('myAudio').pause()
+        function isJsonString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
         }
-
-    });
-
-    const sendMessage = () => {
-        socket.send('Hello From Client1!');
-    }
-</script>
-</html> 
+    </script>
+</html>
