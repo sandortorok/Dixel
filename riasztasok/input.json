@@ -1,0 +1,286 @@
+[
+   {
+      "name":"Manitér Körpálya",
+      "index": 25
+   },
+   {
+      "name":"300TT",
+      "index": 1
+   },
+   {
+      "name":"Fűszer-Ad.Rakt.",
+      "index": 2
+   },
+   {
+      "name":"Csirke Csomagoló Belsőség",
+      "index": 3
+   },
+   {
+      "name":"Csirke.dar.hűtőkamra",
+      "index": 4
+   },
+   {
+      "name":"Csirke daraboló nagyterem",
+      "index" : 5
+   },
+   {
+      "name":"Csirke daraboló kisterem",
+      "index" : 6
+   },
+   {
+      "name":"Kartonfagyasztó",
+      "index" : 7
+   },
+   {
+      "name":"Stork.1",
+      "index" : 8
+   },
+   {
+      "name":"Stork.2",
+      "index" : 9
+   },
+   {
+      "name":"Tunnel",
+      "index" : 10
+   },
+   {
+      "name":"Kombinált",
+      "index" : 11
+   },
+   {
+      "name":"1.R04 Alapanyag raktár",
+      "index" : 12
+   },
+   {
+      "name":"2.T10 Készáru rakodó rámpa1",
+      "index" : 13
+   },
+   {
+      "name":"3.T09 Karton taroló végcsomagoló",
+      "index" : 14
+   },
+   {
+      "name":"4.T02 Pácoló",
+      "index" : 15
+   },
+   {
+      "name":"5.T03 Hideg üzemi tér",
+      "index" : 16
+   },
+   {
+      "name":"6.R01 Alap anyag rakodó rámpa",
+      "index" : 17
+   },
+   {
+      "name":"7.T07 Mkt csomagoló",
+      "index" : 18
+   },
+   {
+      "name":"8.T10 Rakodó rámpa fagy.felöl",
+      "index" : 19
+   },
+   {
+      "name":"9.Készáru raktár",
+      "index" : 20
+   },
+   {
+      "name":"10.Spirál fagyasztó Heinen",
+      "index" : 21
+   },
+   {
+      "name":"11.R06 Fűszer kimerő",
+      "index" : 22
+   },
+   {
+      "name":"Kondenzátor Vezérlő Mayekawa combcsontozó",
+      "index":23
+   },
+   {
+      "name":"Kompresszor vezérlő Mayekawa combcsontozó",
+      "index":24
+   },
+   {
+      "name":"Kompresszor vezérlő nagyterem",
+      "index":0
+   },
+   {
+      "name":"Kondenzátor vezérlő nagyterem",
+      "index":26
+   },
+   {
+      "name":"Mayekawa Combcsontozó terem",
+      "index":27
+   },
+   {
+      "name":"Csirkedaraboló nagyterem",
+      "index":28
+   },
+   {
+      "name":"Csirkedaraboló közép",
+      "index":29
+   },
+   {
+      "name":"Darfresh Alapanyag hűtő",
+      "index":30
+   },
+   {
+      "name":"Darfresh Készárú hűtő",
+      "index":31
+   },
+   {
+      "name":"Darfresh munkaterem",
+      "index":32
+   },
+   {
+      "name":"Fejhűtő tároló",
+      "index":33
+   },
+   {
+      "name":"Kombinált vízhűtő",
+      "index":34
+   },
+   {
+      "name":"KFC Manipulációs tér",
+      "index":35
+   },
+   {
+      "name":"KFC Gyártóterem",
+      "index":36
+   },
+   {
+      "name":"KFC HŰtőkamra",
+      "index":37
+   },
+   {
+      "name":"Fagyasztó 1",
+      "index":38
+   },
+   {
+      "name":"Fagyasztó 2",
+      "index":39
+   },
+   {
+      "name":"Légkezelő glikol",
+      "index":40
+   },
+   {
+      "name":"Léghűtő glikol",
+      "index":41
+   },
+   {
+      "name":"Közlekedő",
+      "index":42
+   },
+   {
+      "name":"Tűspácoló Helyiség",
+      "index":43
+   },
+   {
+      "name":"Bemerítő Pácoló Helyiség",
+      "index":44
+   },
+   {
+      "name":"Közlekedő 2",
+      "index":45
+   },
+   {
+      "name":"Sűtő Terem",
+      "index":46
+   },
+   {
+      "name":"Filéző",
+      "index":47
+   },
+   {
+      "name":"Csomagoló",
+      "index":48
+   },
+   {
+      "name":"Kartonozó",
+      "index":49
+   },
+   {
+      "name":"Árukiadó",
+      "index":50
+   },
+   {
+      "name":"Tepertőkrém gyártó",
+      "index":51
+   },
+   {
+      "name":"Alapanyag Tároló",
+      "index":52
+   },
+   {
+      "name":"Tűspácoló Pihentető Hűtő",
+      "index":53
+   },
+   {
+      "name":"Bemerítő Pácoló Pihentető Hűtő",
+      "index":54
+   },
+   {
+      "name":"Hűtő",
+      "index":55
+   },
+   {
+      "name":"Késztermék Tároló 1",
+      "index":56
+   },
+   {
+      "name":"Késztermék Tároló 2",
+      "index":57
+   },
+   {
+      "name":"Kéreg fagyasztó",
+      "index":58
+   },
+   {
+      "name":"Sokkoló Hűtő",
+      "index":59
+   },
+   {
+      "name":"Napi tároló 2.",
+      "index":60
+   },
+   {
+      "name":"Libadaraboló csom.2.",
+      "index":61
+   },
+   {
+      "name":"Mélyhúzó-csomagoló t.",
+      "index":62
+   },
+   {
+      "name":"Kombinált daraboló csom.",
+      "index":63
+   },
+   {
+      "name":"Hájmérő 2.",
+      "index":64
+   },
+   {
+      "name":"Hájmérő 1.",
+      "index":65
+   },
+   {
+      "name":"Kombinált daraboló 2.",
+      "index":66
+   },
+   {
+      "name":"Kombinált daraboló 1.",
+      "index":67
+   },
+   {
+      "name":"Napi tároló",
+      "index":68
+   },
+   {
+      "name":"Hafe levegős eh.",
+      "index":69
+   },
+   {
+      "name":"Belsőség csomagoló",
+      "index":70
+   }
+]

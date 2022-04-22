@@ -1,18 +1,99 @@
-
+const express = require("express");
+const cors = require("cors")
+const WebSocket = require('ws')
 const puppeteer = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(pluginStealth());
 const ping = require("ping");
+var inputData = require('./input.json');
+inputData.sort(function(a, b) {
+    return parseFloat(a.index) - parseFloat(b.index);
+});
+
+const app = express();
+app.use(cors());
+app.use(express.json())
+
+const server = require('http').createServer(app)
+
+const wss = new WebSocket.Server({server:server})
+
+wss.on('connection', function connection(ws) {
+    console.log('A new client Connected!');
+    ws.send('Welcome New Client!');
+    
+    ws.on('message', function incoming(message) {
+        console.log('received: %s', message);
+    });
+});
+
+
+function sendMSG(message){
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(message);        
+        }
+    });
+}
 
 
 
+  
+
+// simple route
+app.get("/", (req, res) => {
+    res.json({ hello: "This is my backend :))))" });
+});
+
+app.post('/start', (req, res) => {
+    console.log('start button pressed')
+    if (typeof browser == "undefined") {
+        start();
+        console.log('started')
+    }
+    res.send("start")
+})
+
+app.post('/stop', (req, res) => {
+    console.log('stop button pressed')
+    if (typeof browser != "undefined") {
+        browser.close();
+        sendMSG('stopAudio');
+        browser = undefined;
+        console.log('stopped')
+    }
+})
+
+app.post('/restart', (req, res) => {
+    console.log('restart button pressed')
+    if (typeof browser != "undefined") {
+        browser.close();
+        sendMSG('stopAudio');
+        browser = undefined;
+        console.log('stopped')
+
+    }
+    res.send("restart")
+    setTimeout(function () {
+        if (typeof browser == "undefined") {
+            start();
+            console.log('started')
+
+        }
+    }, 2000)
+
+})
+
+server.listen(8000, () => {
+    console.log('server started at http://localhost:8000')
+})
 
 async function login(browser, unloadedPages){
     for (let i = 0; i < unloadedPages.length; i++) {
         var currentURL  = unloadedPages[i].URL;
         const page = await browser.newPage();
         try {
-            await page.goto(currentURL, {timeout: 1000}),
+            await page.goto(currentURL),
             await page.waitForSelector('#login-username', {
                 visible: true,
             });
@@ -117,6 +198,23 @@ async function getTempData(loadedPages){
             }
         }
     }
+    sensorData.map(obj =>{
+        var found = inputData.filter(function(inputObj) { return inputObj.name == obj.name; });
+        if (found.length > 0){
+            let inputObj = found[0]
+            obj.index = inputObj.index
+            return obj
+        }
+        else{
+            console.log('else')
+            obj.index = inputData.length
+            inputData.push(obj)
+            return obj
+        }
+    })
+    sensorData.sort(function(a, b) {
+        return parseFloat(a.index) - parseFloat(b.index);
+    });
     sendMSG(JSON.stringify(sensorData))
     console.log('Sent Alarm Data')
 }
@@ -130,14 +228,14 @@ async function start(){
         // {URL: "file:///home/sanyi/Desktop/300TT.html"}
         {URL: "http://192.168.0.150"},
         {URL: "http://192.168.0.160"},
-        // {URL: "http://192.168.0.170"},
-        // {URL: "http://192.168.0.180"},
-        // {URL: "http://192.168.0.190"},
-        // {URL: "http://192.168.0.220"},
-        // {URL: "http://192.168.0.230"}
+        {URL: "http://192.168.0.170"},
+        {URL: "http://192.168.0.180"},
+        {URL: "http://192.168.0.190"},
+        {URL: "http://192.168.0.220"},
+        {URL: "http://192.168.0.230"}
     ]
     loadedPages = []
-    browser = await puppeteer.launch({headless: false});
+    browser = await puppeteer.launch({headless: true});
     while(true){
         try{
             await aliveCheck(loadedPages, unloadedPages)
@@ -212,10 +310,6 @@ var loadedPages = []
 start()
 
 console.log('started')
-
-    
-    
-
 
 
 
