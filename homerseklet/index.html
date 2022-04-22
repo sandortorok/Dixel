@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="style.css" />
-</head>
 <html>
-    <body>
+    <head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script1.js" defer></script>
+    <script src="script2.js" defer></script>
+    
+    
+</head>
+<body>
         <section id = "mygrid" class="flexgrid">
             <div class="right-side">
                 <div class="right-top">
@@ -20,135 +24,5 @@
             </div>
         </section>
     </body>
-    <script>
-        function start(){
-            arr = []
-            msgHandler(arr)
-        }
-        start()
-        function addElement(header, obj){
-            name = obj.name;
-            color = obj.color;
-            temp = obj.temp;
 
-            bottomdiv = document.createElement("div");
-            bottomdiv.classList.add("right-bottom")
-            header.append(bottomdiv);
-
-            firstitem = document.createElement("div")
-            firstitem.classList.add("item")
-            firstitem.classList.add(color)
-            firstitem.innerHTML = name
-            bottomdiv.append(firstitem)
-
-            seconditem = document.createElement("div")
-            seconditem.classList.add("item")
-            seconditem.classList.add(color)
-            seconditem.innerHTML = temp
-            seconditem.onclick = function(){console.log('hey')}
-            bottomdiv.append(seconditem)
-        }
-        function msgHandler(objArray){
-            mygrid = document.getElementById('mygrid')
-            mygrid.innerHTML = ""
-
-            //header1
-
-            header1 = document.createElement("div");
-            header1.classList.add("right-side")
-            mygrid.append(header1)
-
-            mytop = document.createElement("div")
-            mytop.classList.add("right-top")
-            header1.append(mytop)
-
-            firstitem = document.createElement("div")
-            firstitem.classList.add("item")
-            firstitem.innerHTML = "Utolsó frissítés:"
-            mytop.append(firstitem)
-
-            objArray1 = objArray.splice(0, 30)
-            objArray1.forEach(obj => {
-                addElement(header1, obj)
-            })
-            leftover = 30 - objArray1.length
-            for (i = 0; i < leftover; i++) {
-                addElement(header1, {name : "-", color : "device-status-off", temp: " - "})
-            }
-            //header2
-
-            header2 = document.createElement("div");
-            header2.classList.add("right-side")
-            mygrid.append(header2)
-
-            mytop = document.createElement("div")
-            mytop.classList.add("right-top")
-            header2.append(mytop)
-
-            firstitem = document.createElement("div")
-            firstitem.classList.add("item")
-
-            var time = new Date();
-            firstitem.innerHTML = time.toLocaleString()
-            mytop.append(firstitem)
-
-            objArray2 = objArray.splice(0, 30)
-            objArray2.forEach(obj => {
-                addElement(header2, obj)
-            })
-            leftover = 30 - objArray2.length
-            for (i = 0; i < leftover; i++) {
-                addElement(header2, {name : "-", color : "device-status-off", temp: " - "})
-            }
-            //header3
-
-            header3 = document.createElement("div");
-            header3.classList.add("right-side")
-            mygrid.append(header3)
-
-            mytop = document.createElement("div")
-            mytop.classList.add("right-top")
-            header3.append(mytop)
-
-            firstitem = document.createElement("div")
-            firstitem.classList.add("item")
-            firstitem.innerHTML = "OSZLOP 3"
-            mytop.append(firstitem)
-
-            objArray3 = objArray.splice(0, 30)
-            objArray3.forEach(obj => {
-                addElement(header3, obj)
-            })
-            leftover = 30 - objArray3.length
-            for (i = 0; i < leftover; i++) {
-                addElement(header3, {name : "-", color : "device-status-off", temp: " - "})
-            }
-        }
-        // Create WebSocket connection.
-        const socket = new WebSocket('ws://localhost:8000');
-    
-        // Connection opened
-        socket.addEventListener('open', function (event) {
-            console.log('Connected to WS Server')
-        });
-    
-        // Listen for messages
-        socket.addEventListener('message', function (event) {
-            if (isJsonString(event.data)) {
-                msgHandler(JSON.parse(event.data));
-            }
-        });
-    
-        const sendMessage = () => {
-            socket.send('Hello From Client1!');
-        }
-        function isJsonString(str) {
-            try {
-                JSON.parse(str);
-            } catch (e) {
-                return false;
-            }
-            return true;
-        }
-    </script>
 </html>
