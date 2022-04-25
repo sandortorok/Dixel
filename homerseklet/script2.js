@@ -1,88 +1,80 @@
-function update(objArray){
+var inputData = []
+
+function update(objArray) {
     objArray.map(obj => {
-        console.log(obj.temp)
-        newtemp = obj.temp.replace( /^\D+/g, '')
-        if(newtemp.length > 0)
-            obj.temp = newtemp
-        else
-            obj.temp = "- °C"
+        if (obj.temp) {
+            newtemp = obj.temp.replace(/^\D+/g, '')
+            if (newtemp.length > 0)
+                obj.temp = newtemp
+            else
+                obj.temp = "- °C"
+        }
         return obj
     })
     mygrid = document.getElementById('mygrid')
     header1 = (mygrid.childNodes)[0]
     header2 = (mygrid.childNodes)[1]
     header3 = (mygrid.childNodes)[2]
-    
-    
+
+
     objArray.forEach(obj => {
-        if (header1.textContent.includes(obj.name) || header1.textContent.includes("---")){
-            updateElement(header1, obj)
-        }
-        else if (header2.textContent.includes(obj.name) || header2.textContent.includes("---")){
-            updateElement(header2, obj)
-        }
-        else if (header3.textContent.includes(obj.name) || header3.textContent.includes("---")){
-            updateElement(header3, obj)
-        }
-        else{
-            console.log("nospace")
-        }
+        headerItems = Array.from(header1.childNodes).slice(1, 30)
+        headerItems.forEach(item =>{
+            if (item.childNodes[0].childNodes[0].data == obj.name){
+                changeValues(item, obj)
+            }
+        })
+        headerItems = Array.from(header2.childNodes).slice(0, 30)
+        headerItems.forEach(item =>{
+            if (item.childNodes[0].childNodes[0].data == obj.name){
+                changeValues(item, obj)
+            }
+        })
+        headerItems = Array.from(header3.childNodes).slice(0, 30)
+        headerItems.forEach(item =>{
+            if (item.childNodes[0].childNodes[0].data == obj.name){
+                changeValues(item, obj)
+            }
+        })
     });
 }
-function changeValues(child, obj){
+function changeValues(child, obj) {
+    if(obj.header){
+        return
+    }
     child.childNodes[0].childNodes[0].data = obj.name
     child.childNodes[1].childNodes[0].data = obj.temp
-    
+
     child.childNodes[0].classList.forEach(cName => {
-        if(cName.includes("device-status")){
+        if (cName.includes("device-status")) {
             child.childNodes[0].classList.replace(cName, obj.color)
             child.childNodes[1].classList.replace(cName, obj.color)
         }
     })
 }
-function updateElement(header, obj){
-    headerItems = Array.from(header.childNodes).slice(1, 31)
-    let searchName = ""
-    if (header.textContent.includes(obj.name))
-    searchName = obj.name
-    else 
-    searchName = "---"
-    
-    try{
-        headerItems.forEach(child => {
-            if(child.childNodes[0].innerText.includes(searchName)){
-                changeValues(child, obj)
-                throw "Break"
-            }
-        })
-    }
-    catch(e){
-        if (e !== 'Break') throw e
-    }
-}
-function makeDropdown(item){
+function makeDropdown(item) {
     item.setAttribute('dropdown', '');
     item.classList.add("dropdown")
     dropdown_menu = document.createElement("div")
     dropdown_menu.classList.add("dropdown-menu")
     item.append(dropdown_menu)
-    
+
     dropdown_heading = document.createElement("div")
     dropdown_heading.classList.add("dropdown-heading")
-    
+
     dropdown_heading.innerHTML = "MÉRÉS"
     dropdown_menu.append(dropdown_heading)
-    
+
     dropdown_buttons = document.createElement("div")
     dropdown_buttons.classList.add("dropdown-buttons")
     dropdown_menu.append(dropdown_buttons)
-    
+
     first_button = document.createElement("p")
     first_button.classList.add("btn")
     first_button.innerHTML = "KI"
     first_button.addEventListener("click", onSwitch)
     dropdown_buttons.append(first_button)
-    
+
     second_button = document.createElement("p")
     second_button.classList.add("btn")
     second_button.innerHTML = "BE"
@@ -102,7 +94,9 @@ socket.addEventListener('open', function (event) {
 // Listen for messages
 socket.addEventListener('message', function (event) {
     if (isJsonString(event.data)) {
-        update(JSON.parse(event.data));
+        sensorData = JSON.parse(event.data)
+        filterData(sensorData)
+        update(inputData);
     }
 });
 
@@ -118,13 +112,9 @@ function isJsonString(str) {
     return true;
 }
 
-start()
+getInputData()
 
-function start(){
-    arr = []
-    createDivs(arr)
-}
-function createDivs(objArray){
+function createDivs(objArray) {
     mygrid = document.getElementById('mygrid')
     mygrid.innerHTML = ""
 
@@ -133,23 +123,24 @@ function createDivs(objArray){
     header1 = document.createElement("div");
     header1.classList.add("right-side")
     mygrid.append(header1)
-
+    
     mytop = document.createElement("div")
     mytop.classList.add("right-top")
     header1.append(mytop)
-
+    
     firstitem = document.createElement("div")
     firstitem.classList.add("item")
-    firstitem.innerHTML = "Utolsó frissítés:"
+    var time = new Date();
+    firstitem.innerHTML = `Utolsó frissítés: ${time.toLocaleString()}`
     mytop.append(firstitem)
 
-    objArray1 = objArray.splice(0, 30)
+    objArray1 = objArray.splice(0, 29)
     objArray1.forEach(obj => {
         addElement(header1, obj)
     })
-    leftover = 30 - objArray1.length
+    leftover = 29 - objArray1.length
     for (i = 0; i < leftover; i++) {
-        addElement(header1, {name : "---", color : "device-status-off", temp: "---"})
+        addElement(header1, { name: "---"})
     }
     //header2
 
@@ -157,24 +148,13 @@ function createDivs(objArray){
     header2.classList.add("right-side")
     mygrid.append(header2)
 
-    mytop = document.createElement("div")
-    mytop.classList.add("right-top")
-    header2.append(mytop)
-
-    firstitem = document.createElement("div")
-    firstitem.classList.add("item")
-
-    var time = new Date();
-    firstitem.innerHTML = time.toLocaleString()
-    mytop.append(firstitem)
-
     objArray2 = objArray.splice(0, 30)
     objArray2.forEach(obj => {
         addElement(header2, obj)
     })
     leftover = 30 - objArray2.length
     for (i = 0; i < leftover; i++) {
-        addElement(header2, {name : "---", color : "device-status-off", temp: "---"})
+        addElement(header2, { name: "---"})
     }
     //header3
 
@@ -182,46 +162,103 @@ function createDivs(objArray){
     header3.classList.add("right-side")
     mygrid.append(header3)
 
-    mytop = document.createElement("div")
-    mytop.classList.add("right-top")
-    header3.append(mytop)
-
-    firstitem = document.createElement("div")
-    firstitem.classList.add("item")
-    firstitem.innerHTML = "OSZLOP 3"
-    mytop.append(firstitem)
-
     objArray3 = objArray.splice(0, 30)
     objArray3.forEach(obj => {
         addElement(header3, obj)
     })
     leftover = 30 - objArray3.length
     for (i = 0; i < leftover; i++) {
-        addElement(header3, {name : "---", color : "device-status-off", temp: "---"})
+        addElement(header3, { name: "---"})
+    }
+
+    //header4
+
+    header4 = document.createElement("div");
+    header4.classList.add("right-side")
+    mygrid.append(header4)
+
+    objArray4 = objArray.splice(0, 30)
+    objArray4.forEach(obj => {
+        addElement(header4, obj)
+    })
+    leftover = 30 - objArray4.length
+    for (i = 0; i < leftover; i++) {
+        addElement(header4, { name: "---"})
     }
 }
-function addElement(header, obj){
-    myname = obj.name;
-    color = obj.color;
-    temp = obj.temp;
+function addElement(header, obj) {
 
-    bottomdiv = document.createElement("div");
-    bottomdiv.classList.add("right-bottom")
-    header.append(bottomdiv);
+    myname = obj.name
+    color = "device-status-off";
+    temp = "---";
 
-    firstitem = document.createElement("div")
-    firstitem.classList.add("item")
-    firstitem.classList.add(color)
-    firstitem.innerHTML = myname
-    bottomdiv.append(firstitem)
+    if (obj.header) {
+        mytop = document.createElement("div")
+        mytop.classList.add("right-top")
+        header.append(mytop)
 
-    seconditem = document.createElement("div")
-    seconditem.classList.add("item")
-    seconditem.classList.add(color)
-    seconditem.innerHTML = temp
-    bottomdiv.append(seconditem)
-    
-    makeDropdown(firstitem)
-    makeDropdown(seconditem)
-    //DROPDOWN STUFF
+        firstitem = document.createElement("div")
+        firstitem.classList.add("item")
+        firstitem.innerHTML = obj.name
+        mytop.append(firstitem)
+    }
+    else {
+        bottomdiv = document.createElement("div");
+        bottomdiv.classList.add("right-bottom")
+        header.append(bottomdiv);
+
+        firstitem = document.createElement("div")
+        firstitem.classList.add("item")
+        firstitem.classList.add(color)
+        firstitem.innerHTML = myname
+        bottomdiv.append(firstitem)
+
+        seconditem = document.createElement("div")
+        seconditem.classList.add("item")
+        seconditem.classList.add("temp")
+        seconditem.classList.add(color)
+        seconditem.innerHTML = temp
+        bottomdiv.append(seconditem)
+
+        makeDropdown(firstitem)
+        makeDropdown(seconditem)
+        //DROPDOWN STUFF
+    }
+}
+function filterData(sensorData) {
+    inputData.map(obj => {
+        var found = sensorData.filter(function (myobj) { return myobj.name == obj.name; });
+        if (found.length > 0) {
+            let msgObj = found[0]
+            obj.temp = msgObj.temp
+            obj.color = msgObj.color
+            if (msgObj.header) {
+                obj.header = true
+            }
+        }
+        else {
+            obj.temp = "+++"
+            obj.color = "device-status-off"
+        }
+        return obj
+    })
+    inputData.sort(function (a, b) {
+        return parseFloat(a.index) - parseFloat(b.index);
+    });
+}
+function getInputData() {
+    fetch('input.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            data.sort(function (a, b) {
+                return parseFloat(a.index) - parseFloat(b.index);
+            });
+            inputData = data.slice(0);
+            createDivs(data)
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
 }

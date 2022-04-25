@@ -5,10 +5,7 @@ const puppeteer = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(pluginStealth());
 const ping = require("ping");
-var inputData = require('./input.json');
-inputData.sort(function(a, b) {
-    return parseFloat(a.index) - parseFloat(b.index);
-});
+
 
 const app = express();
 app.use(cors());
@@ -198,23 +195,7 @@ async function getTempData(loadedPages){
             }
         }
     }
-    sensorData.map(obj =>{
-        var found = inputData.filter(function(inputObj) { return inputObj.name == obj.name; });
-        if (found.length > 0){
-            let inputObj = found[0]
-            obj.index = inputObj.index
-            return obj
-        }
-        else{
-            console.log('else')
-            obj.index = inputData.length
-            inputData.push(obj)
-            return obj
-        }
-    })
-    sensorData.sort(function(a, b) {
-        return parseFloat(a.index) - parseFloat(b.index);
-    });
+
     sendMSG(JSON.stringify(sensorData))
     console.log('Sent Alarm Data')
 }

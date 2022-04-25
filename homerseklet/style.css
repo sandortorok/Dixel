@@ -2,7 +2,6 @@
   background-color: #63A9DD;
   flex: 1;
   margin: 4px;
-  text-align: center;
   color: black;
   width: 80%;
   font-weight: bold;
@@ -19,15 +18,24 @@
   width: 50%;
   display: flex;
   flex-wrap: wrap;
+  margin-right: 2px
 }
 .right-side > * {
   width: 100%;
 }
 .right-bottom, .right-top {
   display: flex;
+  border-color: black; 
+  border-style: solid; 
 }
+.right-bottom{
+  text-align: center;
 
-
+  border-width: 0 2px 0 2px;
+}
+.right-top{
+  border-width: 2px 2px 0 2px;
+}
 .device-status-acqoff{
   background:#696969
 }
@@ -125,4 +133,7 @@ p{
 .fekete{
   background-color: #24221f;
   color:white;
+}
+.temp{
+  max-width: 15%
 }
