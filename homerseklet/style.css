@@ -137,3 +137,6 @@ p{
 .temp{
   max-width: 17%
 }
+html{
+  overflow: hidden;
+}
