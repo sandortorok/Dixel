@@ -1,16 +1,16 @@
 [
-    {
-        "name":"LABEL1",
-        "index": 0,
-        "header": true
-    },
+
+   {
+      "name":"Kartonfagyasztó",
+      "index" : 1
+   },
+   {
+      "name":"300TT",
+      "index": 2
+   },
     {
        "name":"Manitér Körpálya",
        "index": 0
-    },
-    {
-       "name":"300TT",
-       "index": 1
     },
     {
        "name":"Fűszer-Ad.Rakt.",
@@ -33,18 +33,10 @@
        "index" : 6
     },
     {
-       "name":"Kartonfagyasztó",
-       "index" : 7
-    },
-    {
        "name":"Stork.1",
        "index" : 8
     },
-    {
-        "name":"LABEL2",
-        "index": 8,
-        "header": true
-    },
+
     {
        "name":"Stork.2",
        "index" : 9
@@ -61,11 +53,7 @@
        "name":"1.R04 Alapanyag raktár",
        "index" : 12
     },
-    {
-        "name":"LABEL3",
-        "index" : 12,
-        "header": true
-    },
+
     {
        "name":"2.T10 Készáru rakodó rámpa1",
        "index" : 13
@@ -98,11 +86,7 @@
        "name":"9.Készáru raktár",
        "index" : 20
     },
-    {
-        "name":"LABEL4",
-        "index":24,
-        "header":true
-    },
+
     {
        "name":"10.Spirál fagyasztó Heinen",
        "index" : 21
@@ -127,11 +111,7 @@
        "name":"Kondenzátor vezérlő nagyterem",
        "index":26
     },
-    {
-        "name":"LABEL5",
-        "index":27,
-        "header":true
-    },
+
     {
        "name":"Mayekawa Combcsontozó terem",
        "index":27
@@ -168,11 +148,7 @@
        "name":"KFC Manipulációs tér",
        "index":35
     },
-    {
-        "name":"LABEL6",
-        "index":35,
-        "header":true
-    },
+
     {
        "name":"KFC Gyártóterem",
        "index":36

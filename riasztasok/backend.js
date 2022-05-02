@@ -5,8 +5,7 @@ const puppeteer = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(pluginStealth());
 const ping = require("ping");
-
-
+const input = require('./input.json')
 const app = express();
 app.use(cors());
 app.use(express.json())
@@ -17,7 +16,7 @@ const wss = new WebSocket.Server({server:server})
 
 wss.on('connection', function connection(ws) {
     console.log('A new client Connected!');
-    ws.send('Welcome New Client!');
+    ws.send(JSON.stringify({'input' : input}));
     
     ws.on('message', function incoming(message) {
         console.log('received: %s', message);

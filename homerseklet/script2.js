@@ -3,11 +3,13 @@ var inputData = []
 function update(objArray) {
     objArray.map(obj => {
         if (obj.temp) {
-            newtemp = obj.temp.replace(/^\D+/g, '')
-            if (newtemp.length > 0)
-                obj.temp = newtemp
-            else
+            let temp = obj.temp.split(':')
+            if (temp.length>1){
+                obj.temp = temp[1].trim()
+            }
+            else{
                 obj.temp = "- °C"
+            }
         }
         return obj
     })
@@ -95,8 +97,18 @@ socket.addEventListener('open', function (event) {
 socket.addEventListener('message', function (event) {
     if (isJsonString(event.data)) {
         sensorData = JSON.parse(event.data)
-        filterData(sensorData)
-        update(inputData);
+        if(sensorData.input){
+            let data  = sensorData.input;
+            data.sort(function (a, b) {
+                return parseFloat(a.index) - parseFloat(b.index);
+            });
+            inputData = data.slice(0);
+            createDivs(data)
+        }
+        else{
+            filterData(sensorData)
+            update(inputData);
+        }
     }
 });
 
@@ -112,7 +124,6 @@ function isJsonString(str) {
     return true;
 }
 
-getInputData()
 
 function createDivs(objArray) {
     mygrid = document.getElementById('mygrid')
@@ -245,20 +256,4 @@ function filterData(sensorData) {
     inputData.sort(function (a, b) {
         return parseFloat(a.index) - parseFloat(b.index);
     });
-}
-function getInputData() {
-    fetch('input.json')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            data.sort(function (a, b) {
-                return parseFloat(a.index) - parseFloat(b.index);
-            });
-            inputData = data.slice(0);
-            createDivs(data)
-        })
-        .catch(function (err) {
-            console.log('error: ' + err);
-        });
 }
