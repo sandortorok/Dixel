@@ -1,7 +1,7 @@
 var inputData = []
 
-function update(objArray) {
-    objArray.map(obj => {
+function update(objArray) { //Frissítjük a táblázatot
+    objArray.map(obj => { //kiszedjük a kapott stringből a felesleges szöveget (Hőmérséklet: 10 °C => 10 °C)
         if (obj.temp) {
             let temp = obj.temp.split(':')
             if (temp.length>1){
@@ -17,8 +17,11 @@ function update(objArray) {
     header1 = (mygrid.childNodes)[0]
     header2 = (mygrid.childNodes)[1]
     header3 = (mygrid.childNodes)[2]
+    header4 = (mygrid.childNodes)[3]
 
-
+    timeitem = header1.childNodes[0].childNodes[0]
+    var time = new Date();
+    timeitem.innerText = `Utolsó frissítés: ${time.toLocaleString()}`
     objArray.forEach(obj => {
         headerItems = Array.from(header1.childNodes).slice(1, 30)
         headerItems.forEach(item =>{
@@ -33,6 +36,12 @@ function update(objArray) {
             }
         })
         headerItems = Array.from(header3.childNodes).slice(0, 30)
+        headerItems.forEach(item =>{
+            if (item.childNodes[0].childNodes[0].data == obj.name){
+                changeValues(item, obj)
+            }
+        })
+        headerItems = Array.from(header4.childNodes).slice(0, 30)
         headerItems.forEach(item =>{
             if (item.childNodes[0].childNodes[0].data == obj.name){
                 changeValues(item, obj)
@@ -115,7 +124,7 @@ socket.addEventListener('message', function (event) {
 const sendMessage = () => {
     socket.send('Hello From Client1!');
 }
-function isJsonString(str) {
+function isJsonString(str) { //megnézzük, hogy az input JSON string-e
     try {
         JSON.parse(str);
     } catch (e) {

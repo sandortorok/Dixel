@@ -12,5 +12,17 @@
     "puppeteer-extra-plugin-stealth": "^2.9.0",
     "sys": "^0.0.1",
     "ws": "^8.5.0"
-  }
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  },
+  "name": "riasztasok",
+  "version": "1.0.0",
+  "main": "backend.js",
+  "scripts": {
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

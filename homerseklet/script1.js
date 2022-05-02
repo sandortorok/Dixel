@@ -1,10 +1,11 @@
+//Ha az oldalon bármire kattintunk ez meghívódik
 document.addEventListener("click", e => {
-  const isDropdownButton = e.target.matches("[dropdown]")
-  if (!isDropdownButton && e.target.closest("[dropdown]") != null) return
+  const isDropdownButton = e.target.matches("[dropdown]") //megnézzük, hogy amire kattintottunk az dropdown-e
+  if (!isDropdownButton && e.target.closest("[dropdown]") != null) return //ha a dropdown-menü-n belül kattintunk akkor return (ne tűnjön el a dropdown)
   
   let currentDropdown
   if (isDropdownButton) {
-    currentDropdown = e.target.closest("[dropdown]")
+    currentDropdown = e.target.closest("[dropdown]") //elmentjük egy változóba a dropdown-t
     currentDropdown.classList.toggle("active")
   }
   

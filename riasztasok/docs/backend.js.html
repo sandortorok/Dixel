@@ -1,21 +1,65 @@
-const express = require("express");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: backend.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: backend.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const express = require("express");
 const cors = require("cors")
 const WebSocket = require('ws')
 const puppeteer = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(pluginStealth());
 const ping = require("ping");
-const input = require('./input.json')
+const { Page, Browser } = require("puppeteer");
+
+/**
+ * beolvasott input.json object
+ * @type {Array&lt;{index: number, name: string}>}
+ */
+const input = require('./input.json');
+
 const app = express();
 app.use(cors());
 app.use(express.json())
 
+/**
+ * http server
+ */
 const server = require('http').createServer(app)
 
+/**
+ * WebSocket Server
+ */
 const wss = new WebSocket.Server({server:server})
 
 wss.on('connection', function connection(ws) {
     console.log('A new client Connected!');
+    /**
+     * Elküldjük a beolvasott input.json-t a frissen bejelentkezett felhasználónak 
+     */
     ws.send(JSON.stringify({'input' : input}));
     
     ws.on('message', function incoming(message) {
@@ -23,7 +67,10 @@ wss.on('connection', function connection(ws) {
     });
 });
 
-
+/**
+ * Üzenet küldése az összes kliensnek a websocket-en
+ * @param {string} message Küldött üzenet
+ */
 function sendMSG(message){
     wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
@@ -33,10 +80,6 @@ function sendMSG(message){
 }
 
 
-
-  
-
-// simple route
 app.get("/", (req, res) => {
     res.json({ hello: "This is my backend :))))" });
 });
@@ -84,8 +127,17 @@ server.listen(8000, () => {
     console.log('server started at http://localhost:8000')
 })
 
+/**
+ * Megpróbálja megnyitni a beadott URL-eket, majd beírja a felhasználónevet és a jelszót. 
+ * Ha sikerül belépni, akkor átmegy a list menüre a Dixell-es weboldalon
+ * 
+ * Az error-t dob az oldal megnyitása, akkor bezárja az oldalt és majd később újra megpróbálja
+ * 
+ * @param {Browser} browser böngésző objektum
+ * @param {Array&lt;{URL: string}>} unloadedPages megnyitandó URL címek listája
+ */
 async function login(browser, unloadedPages){
-    for (let i = 0; i < unloadedPages.length; i++) {
+    for (let i = 0; i &lt; unloadedPages.length; i++) {
         var currentURL  = unloadedPages[i].URL;
         const page = await browser.newPage();
         try {
@@ -135,22 +187,28 @@ async function login(browser, unloadedPages){
         }
     }
 }
+/**
+ * Kiveszi az oldalból a piros színű (device-status-alarm class-al rendelkező) sorokat
+ * Ezekből csinál egy html &lt;tr>&lt;/tr> -t és továbbküldi WebSocket-en a csatlakozott weboldalakra
+ * Ez fog megjelenni az index.html-en
+ * @param {Array&lt;{URL: string, page: Page}>} loadedPages betöltött oldalak listája
+ */
 async function getAlarmData(loadedPages){
     mydata = ""
     var time = new Date();
-    mydata += `<tr><td colspan="4">Utolsó frissítés: ${time.toLocaleString()}</td></tr>`        
-    for (let i = 0; i < loadedPages.length; i++) {
+    mydata += `&lt;tr>&lt;td colspan="4">Utolsó frissítés: ${time.toLocaleString()}&lt;/td>&lt;/tr>`        
+    for (let i = 0; i &lt; loadedPages.length; i++) {
         var currentURL  = loadedPages[i].URL;
         page = loadedPages[i].page;
         const data = await page.evaluate(() => {
             const tds = Array.from(document.querySelectorAll('table tr td'))
             return tds.map(td => {
                 if (typeof td.attributes.colspan != "undefined"){
-                    str = '<tr>' + td.parentElement.innerHTML + '</tr>'
+                    str = '&lt;tr>' + td.parentElement.innerHTML + '&lt;/tr>'
                     return str
                 }
                 if(td.innerHTML.includes("alarm")){
-                    str = '<tr>' + td.parentElement.innerHTML + '</tr>'
+                    str = '&lt;tr>' + td.parentElement.innerHTML + '&lt;/tr>'
                     return str
                 }
             })
@@ -164,22 +222,27 @@ async function getAlarmData(loadedPages){
         for (let y in alarmData){
             mydata += alarmData[y]
         }
-        mydata += `<tr><td colspan="4">${currentURL}</td></tr>`        
+        mydata += `&lt;tr>&lt;td colspan="4">${currentURL}&lt;/td>&lt;/tr>`        
     }
     sendMSG(mydata)
     console.log('Sent Temp Data')
 
 }
+/**
+ * Kiolvassa az oldalból azoknak a soroknak a hőmérséklet értékeit, ahol van hőmérséklet paraméter
+ * ezt belerakja egy JSON Object-be, amit majd WebSocket-en továbbít
+ * @param {Array&lt;{URL: string, page: Page}>} loadedPages betöltött oldalak listája
+ */
 async function getTempData(loadedPages){
     sensorData = []
-    for (let i = 0; i < loadedPages.length; i++) {
+    for (let i = 0; i &lt; loadedPages.length; i++) {
         var currentURL  = loadedPages[i].URL;
         page = loadedPages[i].page;
         const data = await page.evaluate(() => {
             const tds = Array.from(document.querySelectorAll('table tr td'))
             return tds.map(td => {
                 if(td.innerHTML.includes("őmérséklet")){
-                    str = '<tr>' + td.parentElement.innerHTML + '</tr>'
+                    str = '&lt;tr>' + td.parentElement.innerHTML + '&lt;/tr>'
                     classnames = td.parentElement.childNodes[0].childNodes[0].className.split(' ')
                     sensorName = td.parentElement.childNodes[2].innerText
                     temperature = td.innerText.split('\n')[0]
@@ -198,7 +261,17 @@ async function getTempData(loadedPages){
     sendMSG(JSON.stringify(sensorData))
     console.log('Sent Alarm Data')
 }
+/**
+ * Böngésző objektum
+ * @type {Browser}
+ */
 var browser;
+
+/**
+ * Fő függvény, megadjuk itt az URL címeket, amiket be kell majd tölteni.
+ * Ha valamelyik kikapcsol, akkor bezárjuk és újra megpróbáljuk megnyitni/bejelentkezni.
+ * Ha minden rendben megy, akkor 10mp-enként küldi az adatokat a klienseknek
+ */
 async function start(){
     unloadedPages = [
         // {URL: "file:///home/sanyi/Desktop/Panír.5.html"},
@@ -230,7 +303,12 @@ async function start(){
         }
     }
 }
-
+/**
+ * Visszaadja az URL cím indexét a tömbben
+ * @param {Array&lt;{URL: string}>} array url tömb
+ * @param {string} URL URL cím
+ * @returns {number} URL indexe vagy -1
+ */
 function GetIndexInDictArray(array, URL) {
     for(var i in array){
         if(array[i].URL == URL){
@@ -239,6 +317,12 @@ function GetIndexInDictArray(array, URL) {
     }
     return -1
 }
+/**
+ * Megnézi, hogy benne van-e a tömbben az URL cím
+ * @param {Array&lt;{URL: string}>} array URL tömb
+ * @param {string} URL URL cím
+ * @returns {boolean} true, ha benne van, egyébként false
+ */
 function ElementIsInDictArray(array, URL){
     for(var i in array){
         if(array[i].URL == URL){
@@ -247,19 +331,35 @@ function ElementIsInDictArray(array, URL){
     }
     return false;
 }
+/**
+ * Végigmegyünk a removableArray tömbbön és kitöröljük a removeFrom tömbből azokat az elemeket,
+ * amiknek az URL címe megegyezik
+ * @param {Array&lt;{URL: string}>} removeFrom Ebből a tömbből törlünk
+ * @param {Array&lt;{URL: string}>} removableArray Ezeket az URL-eket töröljük ki a tömbből
+ */
 function removeDictArrayFromDictArray(removeFrom, removableArray){
-    for (let i = 0; i < removableArray.length; i++) {
+    for (let i = 0; i &lt; removableArray.length; i++) {
         index = GetIndexInDictArray(removeFrom, removableArray[i].URL);
         if(index != -1){
             removeFrom.splice(index, 1)
         }
     }
 }
+/**
+ * Várunk annyi ms-ot, amennyit megadunk
+ * @param {number} time ennyit várunk (ms)
+ * @returns {Promise&lt;void>}
+ */
 function delay(time) {
     return new Promise(function(resolve) { 
         setTimeout(resolve, time)
     });
 }
+/**
+ * megpingeljük a megadott URL címet hogy megnézzük, hogy él-e
+ * @param {string} URL URL cím
+ * @returns {Boolean} él-e a cím
+ */
 async function isAlive(URL) {
     URL = URL.replace(/^https?:\/\//, '');
     const result = await ping.promise.probe(URL, {
@@ -267,8 +367,14 @@ async function isAlive(URL) {
     });
     return result.alive;
 };
+/**
+ * pingeljük a loadedPages tömbben lévő elemeket. Ha nem kapunk 2mp-en belül visszajelzést,
+ * akkor belerakjuk az unloadedPages tömbbe
+ * @param {Array&lt;{URL: string}>} loadedPages Betöltött címek
+ * @param {Array&lt;{URL: string}>} unloadedPages Még nem betöltött címek
+ */
 async function aliveCheck(loadedPages, unloadedPages){
-    for (let i = 0; i < loadedPages.length; i++) {
+    for (let i = 0; i &lt; loadedPages.length; i++) {
         let alive = await isAlive(loadedPages[i].URL)
         if(!alive){
             console.log('ping close')
@@ -283,8 +389,15 @@ async function aliveCheck(loadedPages, unloadedPages){
     removeDictArrayFromDictArray(loadedPages, unloadedPages);
 
 }
+/**
+ * Nem betöltött URL oldalak
+ * @type {Array&lt;{URL: string}>}
+ */
 var unloadedPages = []
-
+/**
+ * Betöltött URL oldalak
+ * @type {Array&lt;{URL: string, page: Page}>}
+ */
 var loadedPages = []
 
 start()
@@ -297,7 +410,7 @@ console.log('started')
 
 
 
-
+//NEM HASZNÁLJUK TOVÁBB
 
 
 async function CreateDB(){
@@ -341,4 +454,26 @@ async function createTable(){
   });
 }
 // CreateDB();
-// createTable();
+// createTable();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#aliveCheck">aliveCheck</a></li><li><a href="global.html#browser">browser</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#ElementIsInDictArray">ElementIsInDictArray</a></li><li><a href="global.html#getAlarmData">getAlarmData</a></li><li><a href="global.html#GetIndexInDictArray">GetIndexInDictArray</a></li><li><a href="global.html#getTempData">getTempData</a></li><li><a href="global.html#input">input</a></li><li><a href="global.html#isAlive">isAlive</a></li><li><a href="global.html#loadedPages">loadedPages</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#removeDictArrayFromDictArray">removeDictArrayFromDictArray</a></li><li><a href="global.html#sendMSG">sendMSG</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#unloadedPages">unloadedPages</a></li><li><a href="global.html#wss">wss</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Mon May 02 2022 12:26:55 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
