@@ -260,7 +260,21 @@ async function start(){
         {URL: "http://192.168.0.230"}
     ]
     loadedPages = []
-    browser = await puppeteer.launch({headless: true});
+    const options = {
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--no-first-run',
+          '--no-zygote',
+          '--single-process', // <- this one doesn't works in Windows
+          '--disable-gpu'
+        ],
+        headless: true,
+        // executablePath: '/usr/bin/chromium-browser'
+    }
+    browser = await puppeteer.launch(options);
     while(true){
         try{
             await aliveCheck(loadedPages, unloadedPages)
@@ -268,7 +282,7 @@ async function start(){
             removeDictArrayFromDictArray(unloadedPages, loadedPages);
             await getTempData(loadedPages);
             await getAlarmData(loadedPages)
-            await delay(10000)
+            await delay(30000)
         }
         catch(err) {
             return;
