@@ -1,0 +1,395 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Arial",sans-serif;}
+h1
+	{margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	line-height:116%;
+	page-break-after:avoid;
+	background:white;
+	font-size:27.0pt;
+	font-family:"Arial",sans-serif;
+	color:#666666;}
+h2
+	{margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	text-indent:-.25in;
+	line-height:116%;
+	page-break-after:avoid;
+	background:white;
+	font-size:12.0pt;
+	font-family:"Arial",sans-serif;
+	color:#990000;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	text-align:center;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:31.0pt;
+	font-family:"Arial",sans-serif;
+	font-weight:bold;}
+.MsoChpDefault
+	{font-family:"Arial",sans-serif;}
+.MsoPapDefault
+	{line-height:115%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.45pt 841.7pt;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoTitle><a name="_ng4dxfvlkq6j"></a><span lang=hu>PROGRAM
+DOKUMENTÁCIÓ</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h1><a name="_gronyfyuwdkh"></a><span lang=hu>TELEPÍTÉSI ÚTMUTATÓ</span></h1>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h2><a name="_w5uec0ue4h68"></a><span lang=hu>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Szükséges csomagok telepítése</span></h2>
+
+<p class=MsoNormal><b><span lang=hu style='font-size:15.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:10.0pt'><b><span lang=hu
+style='font-size:12.0pt;line-height:115%'>Linux:</span></b></p>
+
+<p class=MsoNormal><b><span lang=hu>Nodejs</span></b><span lang=hu>: sudo apt
+install nodejs</span></p>
+
+<p class=MsoNormal><b><span lang=hu>npm</span></b><span lang=hu>: sudo apt
+install npm</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h2><a name="_u0ts495bueew"></a><span lang=hu>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Program letöltése és kicsomagolása</span></h2>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:10.0pt'><b><span lang=hu
+style='font-size:12.0pt;line-height:115%'>Letöltés:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>A program 2 mappát tartalmaz: “riasztasok” és
+“homerseklet”. Ez tartalmazza az összes szükséges komponenst. Ezeket kell
+kicsomagolni a használni kívánt mappába. </span></p>
+
+<p class=MsoNormal><span lang=hu style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:10.0pt'><b><span lang=hu
+style='font-size:12.0pt;line-height:115%'>Telepítés:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>Terminal-al bele kell menni a “riasztasok”
+mappába és kiadni az <b>npm install</b> parancsot. Ez telepíti a szükséges
+nodejs csomagokat.</span></p>
+
+<p class=MsoNormal><span lang=hu style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<h2><a name="_98n7wr7rr230"></a><span lang=hu>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Program futtatása</span></h2>
+
+<p class=MsoNormal><b><span lang=hu style='font-size:15.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><span lang=hu>A program futtatása a node backend.js
+paranccsal történik. Ahhoz, hogy ez automatikusan történjen a számítógép
+indításakor, ahhoz az alábbi utasításokat kell kiadni:</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>sudo nano /etc/systemd/system/myscript.service</span></b></p>
+
+<p class=MsoNormal><i><span lang=hu>myscript.service tartalma:</span></i></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>[Unit]</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>Description=Dixel
+Service</span></p>
+
+<p class=MsoNormal><span lang=hu style='background:#CCCCCC'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>[Service]</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>User=pi</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>ExecStart=/usr/bin/node
+</span><span lang=hu style='color:red;background:#CCCCCC'>/path/to/file</span><span
+lang=hu style='color:black;background:#CCCCCC'>/riasztasok/backend.js</span></p>
+
+<p class=MsoNormal><span lang=hu style='background:#CCCCCC'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>[Install]</span></p>
+
+<p class=MsoNormal><span lang=hu style='color:black;background:#CCCCCC'>WantedBy=multi-user.target</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>ahol a <span style='color:red'>/path/to/file</span>
+a “riasztasok” mappa útvonalát jelenti. </span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Ezután a service indítása:</span></p>
+
+<p class=MsoNormal><b><span lang=hu>sudo systemctl enable myscript</span></b></p>
+
+<p class=MsoNormal><b><span lang=hu>sudo systemctl start myscript</span></b></p>
+
+<p class=MsoNormal><b><span lang=hu>&nbsp;</span></b></p>
+
+<p class=MsoNormal><span lang=hu>Megnézni, hogy a program fut-e a következő
+paranccsal lehet: </span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>sudo systemctl status myscript</span></b></p>
+
+<p class=MsoNormal><b><span lang=hu>&nbsp;</span></b></p>
+
+<h2><a name="_rd43cymhuuaa"></a><span lang=hu>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Weboldal megnyitása</span></h2>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Ha a backend.js indítása megtörtént, el lehet
+indítani a weboldalakat. A két weboldal: “riasztasok/index.html” és
+“homerseklet/index.html”. </span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h1><a name="_p28pxqqukwoj"></a><span lang=hu>Használati útmutató</span></h1>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>A weboldalakat csak akkor kell megnyitni, ha
+már elindult a háttérben a <b>node backend.js</b></span></p>
+
+<p class=MsoNormal><span lang=hu>program. Ha a Telepítési útmutatóban leírt
+automatikus indítás meg lett csinálva, akkor ezzel nem . A weboldalak maguktól
+működnek, 4 gomb van, amivel lehet szabályozni őket:</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=hu><img
+width=341 height=256 id=image2.png
+src="Dixell%20Dokumentáció_files/image001.png"></span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Ezek mind a “riasztasok” mappában lévő oldalon
+vannak. Az <span style='background:lime'>első</span> gomb indítja el a Dixel
+oldalak lekérdezését. A <span style='color:white;background:red'>második</span><span
+style='background:white'> gombbal lehet megállítani és a </span><span
+style='color:black;background:#6D9EEB'>harmadik</span><span style='background:
+white'> gombbal lehet újraindítani. A </span><span style='color:black;
+background:#D9D9D9'>negyedik</span><span style='background:white'> gombbal
+lehet a sípolásokat némítani, illetve felhangosítani. </span></span></p>
+
+<b><span lang=hu style='font-size:27.0pt;line-height:116%;font-family:"Arial",sans-serif;
+color:#666666'><br clear=all style='page-break-before:always'>
+</span></b>
+
+<h1><a name="_szf5mp7l34yr"></a><span lang=hu>&nbsp;</span></h1>
+
+<h1><a name="_fdnimh6dk4qn"></a><span lang=hu>Hiba észlelése</span></h1>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Mind a 2 weboldal írja, hogy mikor volt
+legutóbb frissítve. Ha egy ideje nem frissít, akkor valószínűleg valami hiba
+van a rendszerben. </span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Logok a <b>journalctl -u myscript.service</b>
+paranccsal érhetők el</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h1><a name="_jk649wegcchz"></a><span lang=hu>Fájl Struktúra</span></h1>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h2><a name="_25ybdhwh7xx1"></a><span lang=hu>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Hőmérséklet</span></h2>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=hu><img
+width=461 height=166 id=image3.png
+src="Dixell%20Dokumentáció_files/image002.png"></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span lang=hu
+style='font-size:13.0pt;line-height:115%'>Hőmérséklet mappa </span></i></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>DIXELL HŐFOKÖSSZESÍTŐ.HTML:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>HTML fájl, azon kívül, hogy be includolja a
+Javascript és css fájlokat, nem csinál semmit.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>SCRIPT1.JS:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Dropdown lekezelő JS fájl.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>SCRIPT2.JS:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Itt hozzuk létre a weboldal kinézetét. Illetve
+kezeljük le a WebSocket-en lévő üzeneteket, azaz a frissítéseket is.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>STYLE:CSS:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Kinézetet leíró fájl.</span></p>
+
+<span lang=hu style='font-size:11.0pt;line-height:115%;font-family:"Arial",sans-serif'><br
+clear=all style='page-break-before:always'>
+</span>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<h2><a name="_14qnr3gg20pa"></a><span lang=hu>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span lang=hu>Riasztások</span></h2>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=hu><img
+width=601 height=93 id=image1.png src="Dixell%20Dokumentáció_files/image003.jpg"></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i><span lang=hu
+style='font-size:13.0pt;line-height:115%'>Riasztások mappa </span></i></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>INDEX.HTML:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>A Dixell Weboldalakhoz hasonló struktúra
+teljesen lemásolva. Illetve hozzáadva pár gombot és audio-t. A gombok egy
+http-requestet küldenek a Backend-nek. Van még hozzá írva egy kis JS rész, ahol
+a WS üzeneteket kezeljük le, illetve még egy rész, ahol a gomboknak az
+event-jeit dolgozzuk fel.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>BACKEND.JS:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>A server. Fő része a programnak. Ezt mindig el
+kell indítani, mielőtt akarunk valamit megjeleníteni. Van generálva egy JSDoc
+fájl, ami dokumentálja.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>STYLE.CSS:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Kinézetet leíró fájl.</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>BEEP.MP3:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Sípoló hang audio fájl-ja</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>INPUT.JSON:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Sorrendet megadó JSON fájl. Könnyen
+érthető/olvasható. </span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>JSDOC.JSON:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Doksi konfiguráció</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>PACKAGE.JSON:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Boilerplate. Generált fájl. Hozzáírtam még 1
+scriptet, ami a doksit generálja. (doc =&gt; futtatása: npm run doc)</span></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=hu>PACKAGE-LOCK.JSON:</span></b></p>
+
+<p class=MsoNormal><span lang=hu>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=hu>Boilerplate. Generált fájl.</span></p>
+
+</div>
+
+</body>
+
+</html>

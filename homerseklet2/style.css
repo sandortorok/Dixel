@@ -1,0 +1,145 @@
+.item {
+  background-color: #63A9DD;
+  flex: 1;
+  margin: 4px;
+  color: black;
+  width: 80%;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 2px;
+  font-size: 28px;
+}
+.item:hover{
+  filter: brightness(85%);
+  z-index: 1;
+}
+.flexgrid {
+  display: flex;
+  height: 98vh
+}
+.right-side {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 2px
+}
+.right-side > * {
+  width: 100%;
+}
+.right-bottom, .right-top {
+  display: flex;
+  border-color: black; 
+  border-style: solid; 
+}
+.right-bottom{
+  text-align: center;
+
+  border-width: 0 2px 0 2px;
+}
+.right-top{
+  border-width: 2px 2px 0 2px;
+}
+.device-status-acqoff{
+  background:#696969
+}
+.device-status-maintenance{
+  background:#696969;
+  border:3px solid #ff9c4c
+}
+.device-status-off{
+  background:#CECECE;
+}
+.device-status-alarm{
+  background:#de6262;
+  color: white;
+}
+.device-status-fsm{
+  border:3px solid #63A9DD
+}
+.device-status-fsm-filled{
+  background:#63A9DD
+}
+.device-status-on{
+  background:#6ec580
+}
+
+
+
+
+
+
+
+
+
+/* DROPDOWN STUFF........ */
+
+
+p{
+  margin: 0;
+}
+
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color:#696969;
+  border: 2px solid white;
+  color:white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + .25rem);
+  width: 93%;
+  padding: .5rem;
+  border-radius: .25rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  opacity: 0;
+  pointer-events: none;
+  cursor: auto;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  z-index: 1000 !important;
+}
+
+.dropdown.active > .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  filter: brightness(100%) !important;
+  position: absolute !important;
+
+}
+
+.dropdown-heading{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+}
+
+.dropdown-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+}
+
+.btn{
+  cursor: pointer;
+}
+
+.bordered{
+  border: 2px solid black;
+}
+
+.fekete{
+  background-color: #24221f;
+  color:white;
+}
+.temp{
+  max-width: 17%
+}
+html{
+  /* overflow: hidden; */
+}
