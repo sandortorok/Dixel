@@ -114,16 +114,16 @@ async function login(browser, unloadedPages){
         const page = await browser.newPage();
         try {
             await page.goto(currentURL),
-            await page.waitForSelector('#login-username', {
-                visible: true,
-            });
-            await page.type('#login-username', "Gepesz", { delay: 30 });
-            await page.type('#login-password', "Gepesz01", { delay: 30 });
-            await page.click('#login-button', { waitUntil: 'networkidle0' })
-            await page.waitForSelector('#desktop-dashboard-view', {
-                visible: true,
-            });
-            await page.select('#desktop-dashboard-view', 'list')
+            // await page.waitForSelector('#login-username', {
+            //     visible: true,
+            // });
+            // await page.type('#login-username', "Gepesz", { delay: 30 });
+            // await page.type('#login-password', "Gepesz01", { delay: 30 });
+            // await page.click('#login-button', { waitUntil: 'networkidle0' })
+            // await page.waitForSelector('#desktop-dashboard-view', {
+            //     visible: true,
+            // });
+            // await page.select('#desktop-dashboard-view', 'list')
             
             loadedPages.push({URL: currentURL, page: page});
             console.log("connected to: ", currentURL) 
@@ -214,14 +214,19 @@ async function getTempData(loadedPages){
             const tds = Array.from(document.querySelectorAll('table tr td'))
             return tds.map(td => {
                 if(td.innerHTML.includes("őmérséklet")){
-                    str = '<tr>' + td.parentElement.innerHTML + '</tr>'
                     classnames = td.parentElement.childNodes[0].childNodes[0].className.split(' ')
                     sensorName = td.parentElement.childNodes[2].innerText
                     temperature = td.innerText.split('\n')[0]
+                    lista = td.innerText.split('\n');
                     colorClass = classnames[classnames.length-1]
+                    lista.forEach(elem=>{
+                        if (elem == "Alacsony hőmérséklet: ON"){
+                            colorClass = "device-status-lowtemp"
+                        }
+                    })
                     return {name : sensorName, temp: temperature, color: colorClass}
                 }
-            })
+            }) 
         });
         for (let x in data){
             if (data[x] != null){
@@ -246,30 +251,30 @@ var browser;
  */
 async function start(){
     unloadedPages = [
-        // {URL: "file:///home/sanyi/Desktop/Panír.5.html"},
-        // {URL: "file:///home/sanyi/Desktop/Dixell5.html"},
-        // {URL: "file:///home/sanyi/Desktop/Kacsasütő üzem.html"},
-        // {URL: "file:///home/sanyi/Desktop/Lev.eh-Csirke feldolgzó.html"},
-        // {URL: "file:///home/sanyi/Desktop/300TT.html"}
-        {URL: "http://192.168.0.150"},
-        {URL: "http://192.168.0.160"},
-        {URL: "http://192.168.0.170"},
-        {URL: "http://192.168.0.180"},
-        {URL: "http://192.168.0.190"},
-        {URL: "http://192.168.0.220"},
-        {URL: "http://192.168.0.230"}
+        {URL: "file:///home/sanyi/Desktop/dixell-htmls/Panír.5.html"},
+        {URL: "file:///home/sanyi/Desktop/dixell-htmls/Dixell5.html"},
+        {URL: "file:///home/sanyi/Desktop/dixell-htmls/Kacsasütő üzem.html"},
+        {URL: "file:///home/sanyi/Desktop/dixell-htmls/Lev.eh-Csirke feldolgzó.html"},
+        {URL: "file:///home/sanyi/Desktop/dixell-htmls/300TT.html"}
+        // {URL: "http://192.168.0.150"},
+        // {URL: "http://192.168.0.160"},
+        // {URL: "http://192.168.0.170"},
+        // {URL: "http://192.168.0.180"},
+        // {URL: "http://192.168.0.190"},
+        // {URL: "http://192.168.0.220"},
+        // {URL: "http://192.168.0.230"}
     ]
     loadedPages = []
     const options = {
         args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--single-process', // <- this one doesn't works in Windows
-          '--disable-gpu'
+        //   '--no-sandbox',
+        //   '--disable-setuid-sandbox',
+        //   '--disable-dev-shm-usage',
+        //   '--disable-accelerated-2d-canvas',
+        //   '--no-first-run',
+        //   '--no-zygote',
+        //   '--single-process', // <- this one doesn't works in Windows
+        //   '--disable-gpu'
         ],
         headless: true,
         // executablePath: '/usr/bin/chromium-browser'
@@ -277,7 +282,7 @@ async function start(){
     browser = await puppeteer.launch(options);
     while(true){
         try{
-            await aliveCheck(loadedPages, unloadedPages)
+            // await aliveCheck(loadedPages, unloadedPages)
             await login(browser, unloadedPages);
             removeDictArrayFromDictArray(unloadedPages, loadedPages);
             await getTempData(loadedPages);
@@ -386,6 +391,7 @@ var unloadedPages = []
  */
 var loadedPages = []
 
+//PROGRAM KEZDÉSE
 start()
 
 console.log('started')

@@ -62,6 +62,9 @@
 .device-status-on{
   background:#6ec580
 }
+.device-status-lowtemp{
+  border:3px solid #63A9DD
+}
 
 
 
