@@ -1,0 +1,626 @@
+[
+  { "name": "K08 RAKTÁR", "index": 0, "header": true },
+  {
+    "name": "Holima",
+    "index": 1,
+    "ip": "192.168.0.160",
+    "address": "0x03A0",
+    "min": -45,
+    "max": -35
+  },
+  {
+    "name": "Kartonfagyasztó",
+    "index": 2,
+    "ip": "192.168.0.160",
+    "address": "0x0380",
+    "min": -45,
+    "max": -35
+  },
+  {
+    "name": "300TT",
+    "index": 3,
+    "ip": "192.168.0.150",
+    "address": "0x0110",
+    "min": -22,
+    "max": -18
+  },
+  {
+    "name": "300TT(2ES)",
+    "index": 3.5,
+    "ip": "192.168.0.150",
+    "address": "0x0120",
+    "min": -45,
+    "max": -35
+  },
+  { "name": "Feldolgozás", "index": 4, "header": true },
+  {
+    "name": "Csirke Csomagoló klíma",
+    "index": 5,
+    "ip": "192.168.0.160",
+    "address": "0x03C0",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Tunnel",
+    "index": 6,
+    "ip": "192.168.0.160",
+    "address": "0x0360",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Stork.1",
+    "index": 7,
+    "ip": "192.168.0.160",
+    "address": "0x0340",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Stork.2",
+    "index": 8,
+    "ip": "192.168.0.160",
+    "address": "0x0350",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Kombinált",
+    "index": 9,
+    "ip": "192.168.0.160",
+    "address": "0x0370",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Spirál 2.",
+    "index": 10,
+    "ip": "192.168.0.160",
+    "address": "0x0390",
+    "min": -45,
+    "max": -35
+  },
+  {
+    "name": "Csirke daraboló nagyterem A.",
+    "index": 10.5,
+    "ip": "192.168.0.160",
+    "address": "0x0330",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csirke daraboló nagyterem B.",
+    "index": 11,
+    "ip": "192.168.0.160",
+    "address": "0x0310",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csirke daraboló kisterem",
+    "index": 12,
+    "ip": "192.168.0.160",
+    "address": "0x0320",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csirke.dar.hűtőkamra",
+    "index": 13,
+    "ip": "192.168.0.160",
+    "address": "0x0300",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Fagyasztó 1",
+    "index": 14,
+    "ip": "192.168.0.180",
+    "address": "0x0800",
+    "min": -30,
+    "max": -15
+  },
+  {
+    "name": "Fagyasztó 2",
+    "index": 15,
+    "ip": "192.168.0.180",
+    "address": "0x0810",
+    "min": -30,
+    "max": -15
+  },
+  { "name": "K08 HŰTŐ", "index": 16, "header": true },
+  {
+    "name": "Manitér Körpálya",
+    "index": 17,
+    "ip": "192.168.0.150",
+    "address": "0x0100",
+    "min": -5,
+    "max": 5
+  },
+  { "name": "DARFRESS ÜZEM", "index": 18, "header": true },
+  {
+    "name": "Darfresh Alapanyag hűtő",
+    "index": 19,
+    "ip": "192.168.0.180",
+    "address": "0x0750",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Darfresh munkaterem",
+    "index": 20,
+    "ip": "192.168.0.180",
+    "address": "0x0770",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Darfresh Készárú hűtő",
+    "index": 21,
+    "ip": "192.168.0.180",
+    "address": "0x0760",
+    "min": -1,
+    "max": 3
+  },
+  { "name": "EK. HÚSÜZEM", "index": 22, "header": true },
+  {
+    "name": "Hűtő 1",
+    "index": 23,
+    "ip": "192.168.0.220",
+    "address": "0x0C20",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Hűtő 2",
+    "index": 24,
+    "ip": "192.168.0.220",
+    "address": "0x0C30",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Hűtő 3",
+    "index": 25,
+    "ip": "192.168.0.220",
+    "address": "0x0C40",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "EK. Húsüzem Gyártó terem",
+    "index": 26,
+    "ip": "192.168.0.220",
+    "address": "0x0C50",
+    "min": 8,
+    "max": 12
+  },
+  { "name": "Csomagolósziget", "index": 27, "header": true },
+  {
+    "name": "Közlekedő 1",
+    "index": 28,
+    "ip": "192.168.0.220",
+    "address": "0x0B00",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Gyártóterem 1",
+    "index": 29,
+    "ip": "192.168.0.220",
+    "address": "0x0B10",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Alapanyag válogató",
+    "index": 30,
+    "ip": "192.168.0.220",
+    "address": "0x0B20",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Közlekedő 2",
+    "index": 31,
+    "ip": "192.168.0.220",
+    "address": "0x0B30",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csomagolóterem 1",
+    "index": 32,
+    "ip": "192.168.0.220",
+    "address": "0x0B40",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csomagolóterem 2",
+    "index": 33,
+    "ip": "192.168.0.220",
+    "address": "0x0B50",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csomagolóterem 3",
+    "index": 34,
+    "ip": "192.168.0.220",
+    "address": "0x0B60",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csomagolóterem 4",
+    "index": 35,
+    "ip": "192.168.0.220",
+    "address": "0x0B70",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Árukiadó",
+    "index": 36,
+    "ip": "192.168.0.220",
+    "address": "0x0B80",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Tepertőkrém gyártó",
+    "index": 37,
+    "ip": "192.168.0.220",
+    "address": "0x0B90",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Hűtőtároló 1",
+    "index": 38,
+    "ip": "192.168.0.220",
+    "address": "0x0BA0",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Hűtőtároló 2",
+    "index": 39,
+    "ip": "192.168.0.220",
+    "address": "0x0BB0",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Alapanyag tároló 1",
+    "index": 40,
+    "ip": "192.168.0.220",
+    "address": "0x0BC0",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Alapanyag tároló 2",
+    "index": 41,
+    "ip": "192.168.0.220",
+    "address": "0x0BD0",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Csomagolóanyag tároló",
+    "index": 42,
+    "ip": "192.168.0.220",
+    "address": "0x0BE0",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Tepertőkrém alapanyag tároló",
+    "index": 43,
+    "ip": "192.168.0.220",
+    "address": "0x0BF0",
+    "min": -1,
+    "max": 4
+  },
+  {
+    "name": "Kéreg fagyasztó",
+    "index": 44,
+    "ip": "192.168.0.220",
+    "address": "0x0C00",
+    "min": -40,
+    "max": 20
+  },
+  {
+    "name": "Sokkoló Hűtő",
+    "index": 45,
+    "ip": "192.168.0.220",
+    "address": "0x0C10",
+    "min": -40,
+    "max": 20
+  },
+  { "name": "KOMBINÁLT DARABOLÓ ÜZEM", "index": 46, "header": true },
+  {
+    "name": "Belsőség csomagoló",
+    "index": 47,
+    "ip": "192.168.0.230",
+    "address": "0x09A0",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Hafe levegős eh.",
+    "index": 48,
+    "ip": "192.168.0.230",
+    "address": "0x0990",
+    "min": -3,
+    "max": 4
+  },
+  {
+    "name": "Kombinált daraboló 2.",
+    "index": 49,
+    "ip": "192.168.0.230",
+    "address": "0x0960",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Hájmérő 1.",
+    "index": 50,
+    "ip": "192.168.0.230",
+    "address": "0x0950",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Hájmérő 2.",
+    "index": 51,
+    "ip": "192.168.0.230",
+    "address": "0x0940",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Kombinált daraboló 1.",
+    "index": 52,
+    "ip": "192.168.0.230",
+    "address": "0x0970",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Kombinált daraboló csom.",
+    "index": 53,
+    "ip": "192.168.0.230",
+    "address": "0x0930",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Napi tároló",
+    "index": 54,
+    "ip": "192.168.0.230",
+    "address": "0x0980",
+    "min": -3,
+    "max": 4
+  },
+  { "name": "DARFRESS 2. CS.", "index": 55, "header": true },
+  {
+    "name": "Mélyhúzó-csomagoló t.",
+    "index": 56,
+    "ip": "192.168.0.230",
+    "address": "0x0920",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Libadaraboló csom.2.",
+    "index": 57,
+    "ip": "192.168.0.230",
+    "address": "0x0910",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Napi tároló 2.",
+    "index": 58,
+    "ip": "192.168.0.230",
+    "address": "0x0900",
+    "min": 0,
+    "max": 4
+  },
+  { "name": "KFC ÜZEM", "index": 59, "header": true },
+  {
+    "name": "KFC Hűtőkamra",
+    "index": 60,
+    "ip": "192.168.0.180",
+    "address": "0x07D0",
+    "min": -3,
+    "max": 4
+  },
+  {
+    "name": "KFC Gyártóterem",
+    "index": 61,
+    "ip": "192.168.0.180",
+    "address": "0x07C0",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "KFC Manipulációs tér",
+    "index": 62,
+    "ip": "192.168.0.180",
+    "address": "0x07B0",
+    "min": 6,
+    "max": 12
+  },
+  { "name": "FEJHŰTŐK", "index": 63, "header": true, "min": -3, "max": 4 },
+  {
+    "name": "Fejhűtő tároló",
+    "index": 64,
+    "ip": "192.168.0.180",
+    "address": "0x07E0",
+    "min": -3,
+    "max": 4
+  },
+  { "name": "RAKTÁR", "index": 65, "header": true },
+  {
+    "name": "Fűszer-Ad.Rakt.",
+    "index": 66,
+    "ip": "192.168.0.150",
+    "address": "0x0130",
+    "min": 0,
+    "max": 10
+  },
+  {
+    "name": "Kombinált vízhűtő",
+    "index": 67,
+    "ip": "192.168.0.180",
+    "address": "0x07F0",
+    "min": 8,
+    "max": 14
+  },
+  { "name": "PANÍR 5 ÜZEM", "index": 68, "header": true },
+  {
+    "name": "1.R04 Alapanyag raktár",
+    "index": 69,
+    "ip": "192.168.0.170",
+    "address": "0x0500",
+    "min": -2,
+    "max": 4
+  },
+  {
+    "name": "2.T10 Készáru rakodó rámpa1",
+    "index": 70,
+    "ip": "192.168.0.170",
+    "address": "0x0510",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "3.T09 Karton taroló végcsomagoló",
+    "index": 71,
+    "ip": "192.168.0.170",
+    "address": "0x0520",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "4.T02 Pácoló",
+    "index": 72,
+    "ip": "192.168.0.170",
+    "address": "0x0530",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "5.T03 Hideg üzemi tér",
+    "index": 73,
+    "ip": "192.168.0.170",
+    "address": "0x0540",
+    "min": 0,
+    "max": 25
+  },
+  {
+    "name": "6.R01 Alap anyag rakodó rámpa",
+    "index": 74,
+    "ip": "192.168.0.170",
+    "address": "0x0550",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "7.T07 Mkt csomagoló",
+    "index": 75,
+    "ip": "192.168.0.170",
+    "address": "0x0560",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "8.T10 Rakodó rámpa fagy.felöl",
+    "index": 76,
+    "ip": "192.168.0.170",
+    "address": "0x0570",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "9.Készáru raktár",
+    "index": 77,
+    "ip": "192.168.0.170",
+    "address": "0x0580",
+    "min": -24,
+    "max": -18
+  },
+  {
+    "name": "10.Spirál fagyasztó Heinen",
+    "index": 78,
+    "ip": "192.168.0.170",
+    "address": "0x0590",
+    "min": -45,
+    "max": -30
+  },
+  {
+    "name": "11.R06 Fűszer kimerő",
+    "index": 79,
+    "ip": "192.168.0.170",
+    "address": "0x05A0",
+    "min": 8,
+    "max": 25
+  },
+  { "name": "Panír 2 Üzem", "index": 80, "header": true },
+  { "name": "Áruátvevő", "index": 81 },
+  { "name": "Közlekedő folyosó", "index": 82 },
+  { "name": "Zöldség tároló", "index": 83 },
+  { "name": "Átmeneti alap.tároló", "index": 84 },
+  { "name": "Szuper fagyos", "index": 85 },
+  { "name": "Gyártó terem", "index": 86 },
+  { "name": "Spirál fagyasztó", "index": 87 },
+  { "name": "Csomagoló P2", "index": 88 },
+  { "name": "Készáru raktár", "index": 89 },
+  { "name": "Pántoló", "index": 90 },
+  { "name": "Árukiadó P2", "index": 91 },
+  { "name": "Panír lé", "index": 92 },
+  { "name": "EGYÉB", "index": 93, "header": true },
+  {
+    "name": "Csirkedaraboló nagyterem freonos",
+    "index": 94,
+    "ip": "192.168.0.180",
+    "address": "0x0790",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csirke Csomagoló Belsőség",
+    "index": 95,
+    "ip": "192.168.0.160",
+    "address": "0x03B0",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Mayekawa combcsontozó",
+    "index": 96,
+    "ip": "192.168.0.180",
+    "address": "0x0780",
+    "min": 8,
+    "max": 12
+  },
+  {
+    "name": "Csirkedaraboló közép",
+    "index": 97,
+    "ip": "192.168.0.180",
+    "address": "0x07A0",
+    "min": 8,
+    "max": 12
+  },
+  { "name": "Kondenzátor Vezérlő Mayekawa combcsontozó", "index": 98 },
+  { "name": "Kompresszor vezérlő Mayekawa combcsontozó", "index": 99 },
+  { "name": "Kompresszor vezérlő nagyterem", "index": 100 },
+  { "name": "Kondenzátor vezérlő nagyterem", "index": 101 },
+  { "name": "Légkezelő glikol", "index": 102 },
+  { "name": "Léghűtő glikol", "index": 103 }
+]
